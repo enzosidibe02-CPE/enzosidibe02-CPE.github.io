@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">{{ headline }}</p>
+    <h1>{{ person.name }}</h1>
+    <p class="lead">{{ tagline }}</p>
+    <p class="meta">B.S. Computer Engineering, Kennesaw State University (May 2026) · M.S. Electrical and Computer Engineering in progress · {{ person.availability }}</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">View projects</a>
+      {% if resume_files %}<a class="btn" href="{{ resume_files[0].href }}">Résumé (PDF)</a>{% endif %}
+      <a class="btn" href="{{ person.github_url }}" rel="noopener">GitHub</a>
+      <a class="btn" href="{{ person.linkedin_url }}" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<section id="about" aria-labelledby="about-h">
+  <div class="wrap prose reveal">
+    <h2 id="about-h">About</h2>
+    <p class="section-lead">What I work on and how I work.</p>
+    {% for para in about %}<p>{{ para }}</p>{% endfor %}
+  </div>
+</section>
+
+<section id="projects" aria-labelledby="projects-h">
+  <div class="wrap">
+    <h2 id="projects-h">Featured projects</h2>
+    <p class="section-lead">Five projects from coursework and a team course. Each page says what was measured, what was modeled or simulated, and what I could not verify.</p>
+    <div class="grid">
+      {% for p in projects %}
+      <article class="card reveal">
+        <span class="badge">{{ p.badge }}</span>
+        <h3><a href="projects/{{ p.slug }}.html">{{ p.title }}</a></h3>
+        <p>{{ p.tagline }}</p>
+        <ul class="chips" aria-label="Technologies">{% for s in p.stack[:5] %}<li>{{ s }}</li>{% endfor %}</ul>
+        <span class="context">{{ p.context }}</span>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="skills" aria-labelledby="skills-h">
+  <div class="wrap">
+    <h2 id="skills-h">Technical skills</h2>
+    <p class="section-lead">Only skills used in the projects above. Machine learning is coursework level.</p>
+    <div class="skills">
+      {% for g in skills %}
+      <div class="card reveal"><h3>{{ g.group }}</h3><p>{{ g["items"] | join(" · ") }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="education" aria-labelledby="edu-h">
+  <div class="wrap">
+    <h2 id="edu-h">Education</h2>
+    <div class="edu">
+      {% for e in education %}
+      <div class="card reveal">
+        <h3>{{ e.degree }}</h3>
+        <span>{{ e.school }}</span>
+        <span class="dates">{{ e.dates }}</span>
+        <p>{{ e.details }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if resume_files %}<section id="resume" aria-labelledby="resume-h">
+  <div class="wrap">
+    <h2 id="resume-h">Résumé</h2>
+    <p class="section-lead">One page each, matching the work on this site. Choose the version closest to the role.</p>
+    <div class="actions">
+      {% for r in resume_files %}<a class="btn{% if loop.first %} primary{% endif %}" href="{{ r.href }}">{{ r.label }}</a>{% endfor %}
+    </div>
+  </div>
+</section>{% endif %}
+
+<section id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <h2 id="contact-h">Contact</h2>
+    <p class="section-lead">The best way to reach me is through LinkedIn{% if resume_files %} or the email address on the résumé{% else %} or GitHub{% endif %}.</p>
+    <ul class="points">
+      <li>GitHub: <a href="{{ person.github_url }}" rel="noopener">{{ person.github_url | replace("https://", "") }}</a></li>
+      <li>LinkedIn: <a href="{{ person.linkedin_url }}" rel="noopener">{{ person.linkedin_url | replace("https://www.", "") }}</a></li>
+      {% if person.show_email_on_site and person.email %}<li>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></li>{% elif resume_files %}<li>Email: listed on the résumé.</li>{% endif %}
+      <li>Location: {{ person.location }}. {{ person.availability }}.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap crumbs"><a href="{{ root }}index.html#projects">← All projects</a></div>
+<div class="wrap project-head">
+  <span class="badge">{{ p.badge }}</span>
+  <h1>{{ p.title }}</h1>
+  <p class="lead" style="color:var(--muted);max-width:46rem;margin:0 0 8px">{{ p.tagline }}</p>
+  <p class="context">{{ p.context }}</p>
+</div>
+
+<div class="wrap two">
+  <div>
+    <h2>Overview</h2>
+    <p>{{ p.summary }}</p>
+    <p><strong>My role.</strong> {{ p.role }}</p>
+
+    <h2>What I found and built</h2>
+    <ul class="points">{% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+
+    <h2>Evidence and limits</h2>
+    <div class="evidence"><strong>How this was checked.</strong> {{ p.evidence }}</div>
+
+    <h2 style="margin-top:32px">Figures</h2>
+    {% for im in p.images %}
+    <figure>
+      <div class="frame"><img src="{{ root }}static/img/{{ im.src }}" alt="{{ im.alt }}" loading="lazy"{% if im.w %} width="{{ im.w }}" height="{{ im.h }}"{% endif %}></div>
+      <figcaption>{{ im.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+
+  <aside class="side" aria-label="Project facts">
+    <h2>Technologies</h2>
+    <ul class="chips">{% for s in p.stack %}<li>{{ s }}</li>{% endfor %}</ul>
+    <h2>Engineering concepts</h2>
+    <ul class="chips">{% for c in p.concepts %}<li>{{ c }}</li>{% endfor %}</ul>
+    <h2>Source code</h2>
+    {% if p.repo_url %}
+      <p><a class="btn" href="{{ p.repo_url }}" rel="noopener">View on GitHub</a></p>
+    {% else %}
+      <p>Repository link will be added when the code is published. Each repository has a README with build steps, results and limitations.</p>
+    {% endif %}
+  </aside>
+</div>
+
+<div class="wrap pager">
+  {% if prev %}<a class="btn" href="{{ prev.slug }}.html">← {{ prev.title }}</a>{% else %}<span></span>{% endif %}
+  {% if next %}<a class="btn" href="{{ next.slug }}.html">{{ next.title }} →</a>{% endif %}
+</div>
+{% endblock %}

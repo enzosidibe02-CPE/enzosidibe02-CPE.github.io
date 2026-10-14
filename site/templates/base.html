@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page_title %}{{ page_title }} · {% endif %}{{ person.name }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="icon" href="{{ root }}static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ root }}static/style.css">
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', '');</script>
+  <script src="{{ root }}static/site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="{{ root }}index.html">{{ person.name }}</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="{{ root }}index.html#about">About</a></li>
+          <li><a href="{{ root }}index.html#projects"{% if current == 'project' %} aria-current="page"{% endif %}>Projects</a></li>
+          <li><a href="{{ root }}index.html#skills">Skills</a></li>
+          <li><a href="{{ root }}index.html#education">Education</a></li>
+          {% if resume_files %}<li><a href="{{ root }}index.html#resume">Résumé</a></li>{% endif %}
+          <li><a href="{{ root }}index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+  {% block main %}{% endblock %}
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>{{ person.name }} · {{ person.location }} · {{ person.availability }}.
+      Results on this site are labeled as measured, modeled, or simulated.
+      Source for this site is a static build; see the repository README.
+      The text, figures and code of this site were prepared with AI assistance (Claude); the projects are the author's coursework and team work.</p>
+    </div>
+  </footer>
+</body>
+</html>

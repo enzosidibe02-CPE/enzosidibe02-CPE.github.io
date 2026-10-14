@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 270" width="640" height="270" role="img" aria-labelledby="t d">
+  <title id="t">EV sensor node sense network</title>
+  <desc id="d">A 20 volt supply feeds a 1.2 ohm shunt and a 50 ohm load to ground. Two voltage dividers of 2.4 kilo-ohm over 390 ohm tap the supply side as A1 and the load side as A2.</desc>
+  <rect width="640" height="270" fill="#ffffff"/>
+  <g fill="none" stroke="#14213d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 70 H250 M310 70 H470 M550 70 H600 V215"/>
+    <rect x="250" y="55" width="60" height="30" fill="#eef3fb"/>
+    <rect x="470" y="55" width="80" height="30" fill="#eef3fb"/>
+    <path d="M150 70 V92 M150 132 V150 M150 150 H178"/>
+    <rect x="135" y="92" width="30" height="40" fill="#eef3fb"/>
+    <path d="M150 150 V172 M150 212 V225"/>
+    <rect x="135" y="172" width="30" height="40" fill="#eef3fb"/>
+    <path d="M380 70 V92 M380 132 V150 M380 150 H408"/>
+    <rect x="365" y="92" width="30" height="40" fill="#eef3fb"/>
+    <path d="M380 150 V172 M380 212 V225"/>
+    <rect x="365" y="172" width="30" height="40" fill="#eef3fb"/>
+    <path d="M135 225 H165 M142 232 H158 M147 239 H153"/>
+    <path d="M365 225 H395 M372 232 H388 M377 239 H383"/>
+    <path d="M585 215 H615 M592 222 H608 M597 229 H603"/>
+  </g>
+  <g fill="#14213d" font-family="Arial, Helvetica, sans-serif" font-size="14">
+    <circle cx="150" cy="70" r="4"/><circle cx="380" cy="70" r="4"/><circle cx="150" cy="150" r="4"/><circle cx="380" cy="150" r="4"/>
+    <text x="40" y="52" font-weight="bold">+20 V</text>
+    <text x="256" y="48">1.2 Ω shunt</text>
+    <text x="485" y="48">50 Ω load</text>
+    <text x="172" y="116">2.4 kΩ</text><text x="172" y="196">390 Ω</text>
+    <text x="402" y="116">2.4 kΩ</text><text x="402" y="196">390 Ω</text>
+    <text x="184" y="155" font-weight="bold">A1</text><text x="414" y="155" font-weight="bold">A2</text>
+    <text x="40" y="262" font-size="12" fill="#444">I = (V_A1 − V_A2) / 1.2 Ω, with each tap scaled by (2400 + 390) / 390</text>
+  </g>
+</svg>

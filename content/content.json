@@ -1,0 +1,334 @@
+{
+  "person": {
+    "name": "Etienne Enzo Sidibe",
+    "short_name": "Enzo Sidibe",
+    "location": "Atlanta, GA area",
+    "availability": "Available mid-2027",
+    "github_user": "enzosidibe02-CPE",
+    "github_url": "https://github.com/enzosidibe02-CPE",
+    "linkedin_url": "https://www.linkedin.com/in/etiennesidibe",
+    "languages_spoken": "English, French, Bambara"
+  },
+  "headline": "Embedded systems and firmware engineer",
+  "tagline": "C/C++ firmware, embedded DSP, and controls, with models and tests that check the work.",
+  "about": [
+    "I'm a Computer Engineering graduate (B.S., May 2026) and a master's student in Electrical and Computer Engineering at Kennesaw State University. My work so far is coursework and team projects: firmware on STM32 and Arduino boards, DSP on a Cortex-M4F, a PD/PID servo design in MATLAB, and an FPGA design in VHDL. I have no professional engineering experience yet, and I'm looking for an entry-level role starting in mid-2027.",
+    "I like to check my own work. For several of these projects I wrote a model or a test that makes the code's assumptions visible. Doing that showed me that my DTMF detector's fixed ±45 Hz tolerance is what limits it, that a current-sense function in a team firmware never returned a value, and that two 1 % resistors can swamp a shunt signal. Each project page says what was measured, what was only modeled, and what I could not verify.",
+    "I speak English, French and Bambara. Outside engineering I lead a 15-person usher team at my church."
+  ],
+  "education": [
+    {
+      "degree": "M.S., Electrical and Computer Engineering (coursework option)",
+      "school": "Kennesaw State University",
+      "dates": "In progress, expected Spring 2027",
+      "details": "Graduate GPA 4.0 on 6 credit hours completed (Summer 2026). Fall 2026: Applied Communication Systems, Applications of Neural Networks, Applied Engineering Mathematics."
+    },
+    {
+      "degree": "B.S., Computer Engineering",
+      "school": "Kennesaw State University",
+      "dates": "Conferred May 14, 2026",
+      "details": "Relevant coursework: Control Systems, Embedded DSP, Sensors and Actuators, Device Networks, VHDL Design with FPGAs."
+    }
+  ],
+  "skills": [
+    {
+      "group": "Programming",
+      "items": [
+        "C",
+        "C++",
+        "Python",
+        "MATLAB",
+        "VHDL"
+      ]
+    },
+    {
+      "group": "Embedded and DSP",
+      "items": [
+        "STM32 (HAL, CubeIDE, ADC, DAC, DMA, timers, UART)",
+        "CMSIS-DSP (real FFT, FIR)",
+        "Arduino (UNO R4 WiFi, Mega 2560)",
+        "State machines"
+      ]
+    },
+    {
+      "group": "Controls and modeling",
+      "items": [
+        "PD/PID design and tuning",
+        "Transfer-function modeling",
+        "Pole placement",
+        "Simulink",
+        "Anti-windup"
+      ]
+    },
+    {
+      "group": "Digital design",
+      "items": [
+        "VHDL",
+        "Vivado",
+        "Basys-3 (Artix-7)",
+        "Synchronizers, quadrature decoding"
+      ]
+    },
+    {
+      "group": "Security and networking",
+      "items": [
+        "ECDSA P-256 / SHA-256 message signing",
+        "NTP and HTTP on microcontrollers",
+        "Wireshark"
+      ]
+    },
+    {
+      "group": "Developer tools",
+      "items": [
+        "Git and GitHub",
+        "pytest",
+        "Arduino IDE",
+        "STM32CubeIDE"
+      ]
+    },
+    {
+      "group": "Machine learning (coursework level)",
+      "items": [
+        "Keras CNNs",
+        "Neural network from scratch in NumPy (EE 6770, in progress)"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "stm32-dtmf-detection",
+      "title": "Real-time DTMF detector on an STM32",
+      "tagline": "Timer-triggered ADC, DMA and a 2048-point FFT identify keypad tones and check a 4-digit passcode.",
+      "context": "CPE 3500, Embedded Digital Signal Processing. Solo project, Spring 2026.",
+      "summary": "A bare-metal Cortex-M4F firmware that samples audio at 20 kHz with a hardware-triggered ADC and DMA, computes a 2048-point real FFT with CMSIS-DSP, finds the strongest peak in the low and high DTMF bands, matches both to the keypad table within ±45 Hz, and runs a passcode state machine. A Python model of the same algorithm provides automated tests and robustness figures.",
+      "role": "Wrote the firmware (acquisition, FFT pipeline, decoder, passcode logic) and the host-side model and tests.",
+      "stack": [
+        "C",
+        "STM32 HAL",
+        "CMSIS-DSP",
+        "ADC + DMA + TIM6",
+        "USART",
+        "Python",
+        "NumPy",
+        "pytest"
+      ],
+      "concepts": [
+        "Hardware-triggered sampling",
+        "Real FFT and bin resolution",
+        "Peak detection and rejection logic",
+        "Tolerance design"
+      ],
+      "highlights": [
+        "20 kHz sampling from TIM6 TRGO into ADC1 and DMA, with a 2048-sample window (102.4 ms, 9.77 Hz per bin).",
+        "Rejects silence, single tones and out-of-band pairs.",
+        "Host model: all 16 keys decode correctly up to ±2.5 % tone-frequency error and with noise up to 2400 counts RMS (tone amplitude 600).",
+        "The model showed the limit: a fixed ±45 Hz tolerance fails the 1633 Hz tone at about 2.8 % error, so a proportional tolerance would be better."
+      ],
+      "evidence": "Firmware is the author's CubeIDE project. Results are from a host-side model with synthetic input (38 automated tests). No on-board measurements are included.",
+      "images": [
+        {
+          "src": "dtmf_spectra.png",
+          "alt": "Two magnitude spectra showing the low and high search bands and the two tone peaks for keys 1 and 9",
+          "caption": "Reference-model spectra for keys 1 and 9 with the firmware's search bands."
+        },
+        {
+          "src": "dtmf_sweeps.png",
+          "alt": "Two plots of correct-decision rate versus noise level and versus tone frequency error",
+          "caption": "Robustness of the decoder to noise and tone-frequency error (synthetic input)."
+        }
+      ],
+      "repo": {
+        "name": "stm32-dtmf-detection",
+        "status": "planned"
+      },
+      "folder": "stm32-dtmf-detection",
+      "badge": "Host model + 38 tests"
+    },
+    {
+      "slug": "ev-charging-sensor-node",
+      "title": "Signed sensor node for an EV-charging network",
+      "tagline": "Arduino firmware that signs each reading with ECDSA P-256 and posts it to a validator.",
+      "context": "CPE 4020, team of four, Spring 2026. I wrote the device firmware.",
+      "summary": "Firmware for an Arduino UNO R4 WiFi that reads voltage across a shunt circuit, converts energy and price to integer-scaled fields, timestamps them from NTP, signs the canonical JSON with ECDSA P-256 / SHA-256, and publishes to a validator written by teammates.",
+      "role": "Wrote the device firmware (three commits in the team repository). Teammates wrote the validator, blockchain and dashboards.",
+      "stack": [
+        "C++",
+        "Arduino UNO R4 WiFi",
+        "micro-ecc",
+        "SHA-256",
+        "ArduinoJson",
+        "NTP over UDP",
+        "Python",
+        "pytest"
+      ],
+      "concepts": [
+        "Asymmetric message signing",
+        "Canonical serialization",
+        "Shunt current sensing",
+        "Component-tolerance analysis"
+      ],
+      "highlights": [
+        "Integer scaling (kWh × 1000, price × 10⁶) makes the C++ and Python sides sign identical bytes.",
+        "A message built with the sketch's exact format string and signed with a throwaway key passes the teammates' validator verification function, and a tampered message is rejected.",
+        "Analysis of the sense circuit (1.2 Ω shunt between two 2.4 kΩ/390 Ω dividers): with ±1 % resistors, uncalibrated current error can reach 145 %, so calibration is required.",
+        "Review found that the submitted firmware's current function returned no value; it was completed from the schematic and is marked as untested on hardware."
+      ],
+      "evidence": "10 automated tests on the message format, signature verification and sensing arithmetic, plus a one-off cross-check against the team validator's verify function. The completed current-measurement code and the corrected divider ratio are not yet tested on hardware.",
+      "images": [
+        {
+          "src": "ev_sense_circuit.svg",
+          "alt": "Schematic: 20 volt supply, 1.2 ohm shunt, 50 ohm load, and two voltage dividers feeding analog inputs A1 and A2",
+          "caption": "Sense network used by the firmware (redrawn from the team's circuit diagram)."
+        }
+      ],
+      "repo": {
+        "name": "ev-charging-sensor-node",
+        "status": "planned"
+      },
+      "folder": "ev-charging-sensor-node",
+      "badge": "Tests + circuit analysis"
+    },
+    {
+      "slug": "stm32-fir-fft-lab",
+      "title": "FIR filtering and FFT analysis on an STM32",
+      "tagline": "A 32-tap FIR low-pass filter removes a 3 kHz tone while keeping 400 Hz, checked with a 2048-point FFT.",
+      "context": "CPE 3500 Lab 8, Spring 2026.",
+      "summary": "Firmware that synthesises a 400 Hz plus 3 kHz test signal, filters it with CMSIS-DSP's arm_fir_f32 in 32-sample blocks, and computes magnitude spectra of the input and output with a real FFT. A Python reproduction parses the firmware's own coefficients and checks the response numerically.",
+      "role": "Wrote the lab firmware; built the host-side reproduction and tests for the portfolio.",
+      "stack": [
+        "C",
+        "STM32",
+        "CMSIS-DSP",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Matplotlib"
+      ],
+      "concepts": [
+        "FIR design and linear phase",
+        "Block processing with state",
+        "Bin-aligned test tones",
+        "Filter transient"
+      ],
+      "highlights": [
+        "Both tones fall on exact FFT bins (50 and 375), so a unit cosine reads N/2 = 1024.",
+        "Reproduced response: gain 1.025 at 400 Hz, −46.1 dB at 3 kHz, −3 dB near 858 Hz, group delay 15.5 samples (0.946 ms).",
+        "Block-wise filtering matches a direct convolution, confirmed by a test.",
+        "The raised floor below 1 kHz in the filtered spectrum is the start-up transient from the zero initial state."
+      ],
+      "evidence": "Host-side reproduction of the firmware computation (7 automated tests). Saved memory dumps from the lab did not match the firmware's outputs, so no board capture is included.",
+      "images": [
+        {
+          "src": "fir_response.png",
+          "alt": "Magnitude response of the 32-tap FIR filter in decibels with the 400 Hz and 3 kHz tones marked",
+          "caption": "FIR magnitude response from the firmware's coefficients."
+        },
+        {
+          "src": "fir_signals.png",
+          "alt": "Time-domain signals, spectra and coefficient plot for the FIR lab",
+          "caption": "Input and filtered signals, spectra and coefficients (host reproduction)."
+        }
+      ],
+      "repo": {
+        "name": "stm32-fir-fft-lab",
+        "status": "planned"
+      },
+      "folder": "stm32-fir-fft-lab",
+      "badge": "Host reproduction + 7 tests"
+    },
+    {
+      "slug": "servo-pid-simulation",
+      "title": "PD and PID position control of a DC servo",
+      "tagline": "Pole-placement PD design and a tuned PID that meets overshoot, error and settling targets under saturation and disturbance.",
+      "context": "EE 4201, Lab 10 (Quanser SRV02 plant), Spring 2026.",
+      "summary": "Derives a second-order plant from motor and gearbox parameters, places PD poles from overshoot and settling specifications, adds integral action, and evaluates each design in a nonlinear simulation with ±24 V saturation, anti-windup, a filtered derivative and a 1 V disturbance.",
+      "role": "Designed and simulated the controllers and wrote the lab report; plant parameters and scoring formula come from the lab handout.",
+      "stack": [
+        "MATLAB",
+        "Simulink",
+        "Control System Toolbox"
+      ],
+      "concepts": [
+        "Plant modeling",
+        "Pole placement",
+        "Integral action and anti-windup",
+        "Disturbance rejection"
+      ],
+      "highlights": [
+        "Plant P(s) = 3198.7 / (s² + 36.53 s) in degrees per volt; PD gains Kp = 0.366, Kd = 0.005 for 2 % overshoot and 0.15 s settling.",
+        "Final PID (Kp 3.0, Kd 0.04, Ki 10): 21.9 ms rise, 191 ms settling, 2.40 % overshoot, 0.122 % steady-state error. It is the only one of three tunes that meets all three targets.",
+        "P and PD leave an offset of disturbance/Kp (38.5 % and 10.9 %), which only integral action removes.",
+        "A Simulink model built from the same loop agrees on the offset (10.9 %) and gives 12 % versus 12.9 % overshoot against the 25° target; rise time differs."
+      ],
+      "evidence": "MATLAB R2025b simulation. The report's table reproduces from the scripts. No hardware-in-the-loop runs were performed.",
+      "images": [
+        {
+          "src": "servo_tuned_pid.png",
+          "alt": "Step response of the tuned PID and the motor voltage, which saturates briefly at 24 volts",
+          "caption": "Tuned PID: 25° step at 0.5 s with a 1 V disturbance."
+        },
+        {
+          "src": "servo_pd_linear.png",
+          "alt": "Step response comparison of an ideal second-order prototype and the actual PD loop",
+          "caption": "Linear check of the PD design, with and without the PD zero."
+        }
+      ],
+      "repo": {
+        "name": "servo-pid-simulation",
+        "status": "planned"
+      },
+      "folder": "servo-pid-simulation",
+      "badge": "MATLAB simulation"
+    },
+    {
+      "slug": "fpga-rotary-encoder",
+      "title": "Rotary-encoder interface on an FPGA",
+      "tagline": "VHDL on a Basys-3: synchronizers, quadrature decoder and an RPM/angle display.",
+      "context": "CPE 3020, VHDL Design with FPGAs. Solo project, Fall 2025.",
+      "summary": "Turning a PmodENC encoder moves one LED along a 16-LED bar, and the seven-segment display shows angle or RPM, toggled by the encoder button. The core synchronizes the asynchronous inputs, decodes one step per detent, counts steps over a 0.5 s window and converts the result to BCD.",
+      "role": "Wrote the core logic, the wrapper and the testbench. The debounce and seven-segment driver components were provided by the course.",
+      "stack": [
+        "VHDL",
+        "Vivado",
+        "Basys-3 (Artix-7)",
+        "PmodENC"
+      ],
+      "concepts": [
+        "Clock-domain synchronization",
+        "Quadrature decoding",
+        "Debounce time constants",
+        "Testbench design"
+      ],
+      "highlights": [
+        "Two-flip-flop synchronizers, A-edge quadrature decode with direction from B, 0–15 wrap-around position.",
+        "Debounce time constants chosen per signal: 50 µs for the encoder lines, 2 ms for the button (100 MHz clock).",
+        "Reading the design showed scale approximations: angle uses 23° per step (true 22.5°) and RPM uses a factor of 8 where 16 steps per revolution implies 7.5, about 6.7 % high.",
+        "The saved testbench waveform covers under 1 µs, shorter than the 50 µs debounce time, so it shows the stimulus rather than the response. A longer testbench is the first improvement."
+      ],
+      "evidence": "Demo videos show the design running on a Basys-3 with the encoder. The Vivado simulation exists, but it was not re-run for this portfolio, and the course-provided components are not in the repository.",
+      "images": [
+        {
+          "src": "fpga_hardware.jpg",
+          "alt": "Basys-3 board with the PmodENC encoder, LED bar and seven-segment display lit",
+          "caption": "Frame from the demo video."
+        },
+        {
+          "src": "fpga_wrapper.jpg",
+          "alt": "Block diagram of the wrapper with three debounce blocks feeding the rotary encoder core",
+          "caption": "Wrapper diagram: three debouncers feed the core."
+        },
+        {
+          "src": "fpga_waveform.png",
+          "alt": "Vivado simulation waveform of the testbench",
+          "caption": "Vivado testbench waveform (first ~0.9 µs)."
+        }
+      ],
+      "repo": {
+        "name": "fpga-rotary-encoder",
+        "status": "planned"
+      },
+      "folder": "fpga-rotary-encoder",
+      "badge": "Hardware demo"
+    }
+  ]
+}
