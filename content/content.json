@@ -139,7 +139,7 @@
       ],
       "repo": {
         "name": "stm32-dtmf-detection",
-        "status": "planned"
+        "status": "published"
       },
       "folder": "stm32-dtmf-detection",
       "badge": "Host model + 38 tests"
@@ -183,7 +183,7 @@
       ],
       "repo": {
         "name": "ev-charging-sensor-node",
-        "status": "planned"
+        "status": "published"
       },
       "folder": "ev-charging-sensor-node",
       "badge": "Tests + circuit analysis"
@@ -231,7 +231,7 @@
       ],
       "repo": {
         "name": "stm32-fir-fft-lab",
-        "status": "planned"
+        "status": "published"
       },
       "folder": "stm32-fir-fft-lab",
       "badge": "Host reproduction + 7 tests"
@@ -275,7 +275,7 @@
       ],
       "repo": {
         "name": "servo-pid-simulation",
-        "status": "planned"
+        "status": "published"
       },
       "folder": "servo-pid-simulation",
       "badge": "MATLAB simulation"
@@ -325,7 +325,7 @@
       ],
       "repo": {
         "name": "fpga-rotary-encoder",
-        "status": "planned"
+        "status": "published"
       },
       "folder": "fpga-rotary-encoder",
       "badge": "Hardware demo"
