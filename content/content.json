@@ -329,6 +329,60 @@
       },
       "folder": "fpga-rotary-encoder",
       "badge": "Hardware demo"
+    },
+    {
+      "slug": "red-light-green-light",
+      "title": "Red Light, Green Light game on an Arduino Mega",
+      "tagline": "A doll servo, ultrasonic movement detection, photoresistor landmines and a sweep servo integrated into one real-time game.",
+      "context": "CPE 4010, Sensors, Actuators, and Integration. Team of two with Ethan Welsh, Spring 2026.",
+      "summary": "A physical version of the Squid Game \"Red Light, Green Light\" game. A doll servo and a red/green light alternate every few seconds; an ultrasonic sensor detects movement during red, two photoresistors act as landmines, a second servo sweeps an eliminated player off the field, and an LCD shows the countdown and result. The team report states the system was functional, with ultrasonic sensitivity issues in some games.",
+      "role": "Wrote the sweep-servo game-over routine, the win logic, the ultrasonic-sensor code and the photoresistor landmine code, and troubleshot the integration. Ethan Welsh wrote the start button, the light states, the doll servo, the buzzer tones and the LCD.",
+      "stack": [
+        "C++",
+        "Arduino Mega 2560",
+        "Ultrasonic sensor",
+        "Servos",
+        "Photoresistors",
+        "I²C LCD",
+        "Python",
+        "pytest"
+      ],
+      "concepts": [
+        "Sensor and actuator integration",
+        "Threshold tuning",
+        "Blocking versus non-blocking timing",
+        "Sensor failure modes"
+      ],
+      "highlights": [
+        "Final code is on GitHub unchanged; it matches the code printed in the team report.",
+        "A model of the code's timing shows the lights run on schedule (red about 3.03 s, green about 2.02 s) but the 60-count countdown takes about 75 s, because the one-second clock is reset to the current time on each tick.",
+        "Movement is compared across a 0.4 s sampling gap, so the slowest detectable motion is about 6 cm/s.",
+        "When the ultrasonic sensor gets no echo, pulseIn() returns 0, which satisfies the win test (distance ≤ 5 cm); this is consistent with the report's sensitivity note."
+      ],
+      "evidence": "The team report states the system worked and includes photos of the build. No logs or recorded tests exist. The timing findings come from a model of the code (18 tests) and have not been measured with a stopwatch on the board.",
+      "images": [
+        {
+          "src": "rlgl_setup.jpg",
+          "alt": "A blue shoebox game field with a doll figure, an LCD and wiring at the edge",
+          "caption": "The assembled game field (from the team report)."
+        },
+        {
+          "src": "rlgl_hardware.jpg",
+          "alt": "Arduino Mega on a breadboard with an LCD, ultrasonic sensor, servo and push button",
+          "caption": "Breadboard wiring (from the team report)."
+        },
+        {
+          "src": "rlgl_timing.png",
+          "alt": "Light schedule bars and a countdown curve that reaches zero after about 75 seconds",
+          "caption": "Timing model of the final sketch (analysis, not a measurement)."
+        }
+      ],
+      "repo": {
+        "name": "CPE-4010-Final-Project",
+        "status": "published"
+      },
+      "badge": "Team report + timing model",
+      "folder": "cpe4010-red-light-green-light"
     }
   ]
 }
